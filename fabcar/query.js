@@ -7,7 +7,13 @@
 /*
  * Chaincode query
  */
-
+let multichain = require("multichain-node")({
+	port: 4381,
+	host: '172.18.0.1',
+	user: "multichainrpc",
+	pass: "HZwG5H5Ak6z2ZgqyQaKh7cdX72pzP4ZtLAw6VyVCRxqG"
+	      
+ });
 var Fabric_Client = require('fabric-client');
 var path = require('path');
 var util = require('util');
