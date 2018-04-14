@@ -1,5 +1,3 @@
-// This is just a sample script. Paste your real code (javascript or HTML) here.
-// here only routing is done and if the ro
 'use strict';
 
 
@@ -24,7 +22,7 @@ log4js.configure({
     appenders: { readypolicy: { type: 'file', filename: 'readypolicy.log' } },
     categories: { default: { appenders: ['readypolicy'], level: 'error' } }
   });
-
+ 
 
 
 
@@ -33,14 +31,12 @@ log4js.configure({
 
 
   
-
-
-// This is just a sample script. Paste your real code (javascript or HTML) here.
-// here only routing is done and if the ro
-
 
 const registerUser = require('./functions/registerUser');
 const login = require('./functions/login');
+const central = require('./functions/central');
+const state = require('./functions/state');
+const FPS =require ('./functions/FPS');
 module.exports = router => { 
 
 
@@ -90,6 +86,7 @@ module.exports = router => {
                 }));
         }
     });
+
 router.post('/login', cors(), (req, res) => {
     console.log("entering login function in functions ");
     const emailid = req.body.email;
@@ -101,7 +98,7 @@ router.post('/login', cors(), (req, res) => {
     login
         .loginUser(emailid, passwordid)
         .then(result => {  
-            console.log("resultharini",result); 
+            console.log("result//",result); 
             console.log("result ===>>>",result.users.usertype)
             
 
@@ -120,4 +117,224 @@ router.post('/login', cors(), (req, res) => {
 
 });
 
+
+
+
+
+
+
+
+router.post('/central', cors(), (req, res) => { 
+    const key ="001"
+    const rice = req.body.rice;
+    console.log(rice);
+    const wheat = req.body.wheat;
+    console.log(wheat);
+     
+
+
+    const kerocene = req.body.kerocene;
+    console.log(kerocene);
+    const date = req.body.date;
+    console.log(date);
+    const state = req.body.state;
+    console.log(state);
+    const rices = req.body.rices;
+    console.log(rices);
+    const wheats = req.body.wheats;
+    console.log(wheats);
+    const kerocenes = req.body.kerocenes;
+    console.log(kerocenes);
+    const transactionstring = ({
+        rice:rice,
+        wheat:wheat,
+        kerocene:kerocene,
+        date:date,
+        state:state,
+        rices:rices,
+        wheats:wheats,
+        kerocenes:kerocenes
+        
+    });
+    console.log(transactionstring)
+    if (!rice || !wheat || !kerocene || !date || !state || !rices || !wheats|| !kerocenes ) {
+
+        res
+            .status(400)
+            .json({
+                message: 'Invalid Request !'
+            });
+
+    } else {
+
+        central
+            .central(transactionstring,key)
+            .then(result => {
+
+                res.send({
+                    "message": "Commandities allocated",
+                    "status": true,
+
+
+                });
+
+
+            })
+            .catch(err => res.status(err.status).json({
+                message: err.message
+            }).json({
+                status: err.status
+            }));
+    }
+});
 }
+
+
+router.get('/getstate', cors(), (req, res) => {
+         
+                     const key = req.body.key;
+                     console.log("requestid1", key);
+                  
+         
+         
+                     getstate.getstate(key)
+                     .then(function(result) {
+                         console.log("requestid1",key)
+                           return res.json({
+                              "status":200,
+                              "message": result.query
+                          });
+                      })
+                      .catch(err => res.status(err.status).json({
+                          message: err.message
+                      }));
+           
+              
+             });
+
+
+
+
+
+router.post('/state', cors(), (req, res) => { 
+
+    const rice = req.body.rice;
+    console.log(rice);
+    const wheat = req.body.wheat;
+    console.log(wheat);
+ 
+
+
+    const kerocene = req.body.kerocene;
+    console.log(kerocene);
+    const date = req.body.date;
+    console.log(date);
+    const rices = req.body.rices;
+    console.log(rices);
+    const wheats = req.body.wheats;
+    console.log(wheats);
+    const kerocenes = req.body.kerocenes;
+    console.log(kerocenes);
+    const transaction = ({
+        rice:rice,
+        wheat:wheat,
+        kerocene:kerocene,
+        date:date,
+        district:district,
+        rices:rices,
+        wheats:wheats,
+        kerocenes:kerocenes
+        
+    });
+    console.log(transactionstring)
+    if (!rice || !wheat || !kerocene || !date || !district || !rices || !wheats|| !kerocenes ) {
+
+        res
+            .status(400)
+            .json({
+                message: 'Invalid Request !'
+            });
+
+    } else {
+
+        state
+            .central(transactionstring)
+            .then(result => {
+
+                res.send({
+                    "message": "Commandities Given",
+                    "status": true,
+
+
+                });
+
+
+            })
+            .catch(err => res.status(err.status).json({
+                message: err.message
+            }).json({
+                status: err.status
+            }));
+    }
+});
+
+
+
+
+
+
+router.post('/FPS', cors(), (req, res) => { 
+
+    const rice = req.body.rice;
+    console.log(rice);
+    const wheat = req.body.wheat;
+    console.log(wheat);
+
+
+
+    const kerocene = req.body.kerocene;
+    console.log(kerocene);
+    const date = req.body.date;
+    console.log(date);
+    
+    const transactionstring = ({
+        rice:rice,
+        wheat:wheat,
+        kerocene:kerocene,
+        date:date,
+        rices:rices,
+        wheats:wheats,
+        kerocenes:kerocenes
+        
+    });
+    console.log(transactionstring)
+    if (!rice || !wheat || !kerocene || !date ) {
+
+        res
+            .status(400)
+            .json({
+                message: 'Invalid Request !'
+            });
+
+    } else {
+
+        state
+            .central(transactionstring)
+            .then(result => {
+
+                res.send({
+                    "message": "Goods distributed",
+                    "status": true,
+
+
+                });
+
+
+            })
+            .catch(err => res.status(err.status).json({
+                message: err.message
+            }).json({
+                status: err.status
+            }));
+    }
+});
