@@ -9,7 +9,7 @@ function savetransaction(params) {
     return new Promise((resolve) => {
         var response;
 
-      var TransactionDetails = params.Transactiondetails.transactionstring;
+  var TransactionDetails = params.Transactiondetails.transactionstring;
       var policyNumber= params.Transactiondetails.key;
     console.log("TransactionDetails",params.Transactiondetails.transactionstring)
     console.log("TransactionDetailsssss",params.Transactiondetails.key)

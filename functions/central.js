@@ -16,10 +16,12 @@ exports.central = (transactionstring,key) => new Promise((resolve, reject) => {
            
            Transactiondetails: transactiondetails,
          
-          
+           
        })
-       
+       console.log("result123",result)
+    
        .then((result) => resolve({
+        
            status: 201,
            response:result.response,
            message: 'Commandities allocated Sucessfully !'

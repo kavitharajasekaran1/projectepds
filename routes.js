@@ -130,9 +130,6 @@ router.post('/central', cors(), (req, res) => {
     console.log(rice);
     const wheat = req.body.wheat;
     console.log(wheat);
-     
-
-
     const kerocene = req.body.kerocene;
     console.log(kerocene);
     const date = req.body.date;
@@ -157,7 +154,7 @@ router.post('/central', cors(), (req, res) => {
         
     });
     console.log(transactionstring)
-    if (!rice || !wheat || !kerocene || !date || !state || !rices || !wheats|| !kerocenes ) {
+    if (!rice || !wheat || !date || !state || !rices || !wheats|| !kerocenes ) {
 
         res
             .status(400)
@@ -258,7 +255,7 @@ router.post('/state', cors(), (req, res) => {
     } else {
 
         state
-            .central(transactionstring)
+            .state(transactionstring)
             .then(result => {
 
                 res.send({
