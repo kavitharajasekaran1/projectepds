@@ -1,11 +1,4 @@
-/**
-@author: risabh sharma
-@version: 1.0
-@date: 06/05/2017
-@Description: Hyperledger Fabric Blockchain sample client
-**/
-//this is the start of the application 
-//from here the blockchain enviornment setup would start and our node js port for webservice would also start running
+ running
 'use strict';
 
 const express = require('express');
